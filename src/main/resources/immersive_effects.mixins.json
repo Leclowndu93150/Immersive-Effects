@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.leclowndu93150.immersive_effects.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "immersive_effects.refmap.json",
+  "mixins": [
+    "honey.HoneyBlockMixin"
+  ],
+  "client": [
+    "projectiles.ThrownItemRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
