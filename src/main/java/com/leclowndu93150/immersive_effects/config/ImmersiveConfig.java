@@ -13,6 +13,7 @@ public class ImmersiveConfig {
 
     private static final ForgeConfigSpec.BooleanValue ENDER_PEARL_TRAIL;
     private static final ForgeConfigSpec.BooleanValue HONEY_DRIP;
+    private static final ForgeConfigSpec.BooleanValue TORCH_FLAME;
 
     static {
         BUILDER.push("general");
@@ -25,6 +26,10 @@ public class ImmersiveConfig {
                 .comment("Enable or disable the honey drip particles.")
                 .define("honeyDrip", true);
 
+        TORCH_FLAME = BUILDER
+                .comment("Enable or disable the enhanced torch flame effect.")
+                .define("torchFlame", true);
+
         BUILDER.pop();
     }
 
@@ -32,13 +37,16 @@ public class ImmersiveConfig {
 
     public static boolean enderPearlTrail;
     public static boolean honeyDrip;
+    public static boolean torchFlame;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         enderPearlTrail = ENDER_PEARL_TRAIL.get();
         honeyDrip = HONEY_DRIP.get();
+        torchFlame = TORCH_FLAME.get();
     }
 
     public static boolean isEnderPearlTrailEnabled() {return enderPearlTrail;}
     public static boolean isHoneyDripEnabled() {return honeyDrip;}
+    public static boolean isTorchFlameEnabled() {return torchFlame;}
 }

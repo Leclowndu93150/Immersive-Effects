@@ -1,5 +1,6 @@
 package com.leclowndu93150.immersive_effects.mixin.torches;
 
+import com.leclowndu93150.immersive_effects.config.ImmersiveConfig;
 import com.leclowndu93150.immersive_effects.handler.TorchTracker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -16,12 +17,14 @@ public class WallTorchBlockMixin {
 
     @Inject(method = "animateTick", at = @At("HEAD"), cancellable = true)
     private void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (level.isClientSide()) {
-            BlockPos immutablePos = pos.immutable();
-            if (!TorchTracker.isTracked(immutablePos)) {
-                TorchTracker.addTorch(immutablePos, level);
+        if(ImmersiveConfig.isTorchFlameEnabled()) {
+            if (level.isClientSide()) {
+                BlockPos immutablePos = pos.immutable();
+                if (!TorchTracker.isTracked(immutablePos)) {
+                    TorchTracker.addTorch(immutablePos, level);
+                }
             }
+            ci.cancel();
         }
-        ci.cancel();
     }
 }
