@@ -19,7 +19,7 @@ public class WallTorchBlockMixin {
         if (level.isClientSide()) {
             BlockPos immutablePos = pos.immutable();
             if (!TorchTracker.isTracked(immutablePos)) {
-                TorchTracker.addTorch(immutablePos);
+                TorchTracker.addTorch(immutablePos, level);
             }
         }
         ci.cancel();
