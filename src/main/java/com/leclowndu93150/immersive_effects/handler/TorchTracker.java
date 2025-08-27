@@ -1,6 +1,5 @@
 package com.leclowndu93150.immersive_effects.handler;
 
-import com.leclowndu93150.immersive_effects.commands.FlameTestCommand;
 import com.leclowndu93150.immersive_effects.render.LodestoneEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -20,7 +19,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(modid = "immersive_effects", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -63,10 +61,6 @@ public class TorchTracker {
             TorchData data = entry.getValue();
             
             if (!level.isLoaded(pos)) continue;
-            
-            if (FlameTestCommand.isTestTorch(pos)) {
-                continue;
-            }
 
             if (shouldValidate && currentTime - data.lastValidated > VALIDATION_INTERVAL) {
                 BlockState state = level.getBlockState(pos);

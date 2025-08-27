@@ -100,6 +100,7 @@ public class LodestoneEffects {
                         }
                     })
                     .enableNoClip()
+                    .enableCull()
                     .spawn(level, x + offsetX, yOffset + offsetY, z + offsetZ);
         }
 

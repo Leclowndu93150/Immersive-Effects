@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ThrownItemRenderer.class)
 public class ThrownItemRendererMixin {
 
-    @Inject(method = "render", at = @At("HEAD"), remap = false, cancellable = true)
+    @Inject(method = "render", at = @At("HEAD"), remap = false)
     private void onRenderHead(Entity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci) {
         if (entity instanceof ThrownEnderpearl enderPearl && ImmersiveConfig.isEnderPearlTrailEnabled()) {
             LodestoneEffects.createEnderPearlTrailEffect(enderPearl, partialTicks);

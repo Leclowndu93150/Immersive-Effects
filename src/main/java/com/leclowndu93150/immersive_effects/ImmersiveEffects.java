@@ -1,6 +1,6 @@
 package com.leclowndu93150.immersive_effects;
 
-import com.leclowndu93150.immersive_effects.commands.FlameTestCommand;
+import com.leclowndu93150.immersive_effects.commands.ParticleCountCommand;
 import com.leclowndu93150.immersive_effects.config.ImmersiveConfig;
 import com.leclowndu93150.immersive_effects.registration.ImmersiveParticles;
 import com.mojang.logging.LogUtils;
@@ -31,7 +31,7 @@ public class ImmersiveEffects {
     
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
-        FlameTestCommand.register(event.getDispatcher());
+        ParticleCountCommand.register(event.getDispatcher());
     }
 
 }
