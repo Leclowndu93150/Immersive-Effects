@@ -6,7 +6,8 @@
   "refmap": "immersive_effects.refmap.json",
   "mixins": [
     "honey.HoneyBlockMixin",
-    "torches.TorchBlockMixin"
+    "torches.TorchBlockMixin",
+    "torches.WallTorchBlockMixin"
   ],
   "client": [
     "projectiles.ThrownItemRendererMixin"

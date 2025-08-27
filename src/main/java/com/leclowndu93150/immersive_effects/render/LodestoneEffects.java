@@ -14,8 +14,11 @@ import team.lodestar.lodestone.systems.particle.render_types.LodestoneWorldParti
 import team.lodestar.lodestone.systems.particle.world.options.WorldParticleOptions;
 
 import java.awt.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LodestoneEffects {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LodestoneEffects.class);
 
     public static void createEnderPearlTrailEffect(ThrownEnderpearl enderPearl, float deltaTime) {
         float posX = (float) Mth.lerp(deltaTime, enderPearl.xo, enderPearl.getX());
@@ -39,7 +42,7 @@ public class LodestoneEffects {
             float alpha = 0.8f - i * 0.15f;
 
             WorldParticleBuilder.create(new WorldParticleOptions(ImmersiveParticles.ENDER_PEARL_TRAIL.get()))
-                    .setSpinData(SpinParticleData.create((float)(enderPearl.level().random.nextGaussian() * 0.2f)).build())
+                    .setSpinData(SpinParticleData.create((float) (enderPearl.level().random.nextGaussian() * 0.2f)).build())
                     .setScaleData(GenericParticleData.create(trailScale, 0f).setEasing(Easing.EXPO_OUT).build())
                     .setTransparencyData(GenericParticleData.create(alpha, 0f).setEasing(Easing.QUAD_OUT).build())
                     .setColorData(
@@ -57,24 +60,25 @@ public class LodestoneEffects {
                     );
         }
     }
-    
+
     public static void spawnTorchFlame(Level level, double x, double y, double z, boolean isSoulTorch) {
+        
         Color hotColor = isSoulTorch ? new Color(0xFFFFFF) : new Color(0xFFFF99);
         Color warmColor = isSoulTorch ? new Color(0x00BFFF) : new Color(0xFFAA00);
         Color coolColor = isSoulTorch ? new Color(0x4169E1) : new Color(0xFF4400);
-        
+
         double yOffset = y - 0.1875;
-        
-        for (int i = 0; i < 2; i++) {
+
+        if (level.random.nextFloat() < 0.3f) {
             float angle = level.random.nextFloat() * 6.28f;
             float distance = level.random.nextFloat() * 0.06f;
-            float offsetX = (float)Math.cos(angle) * distance;
-            float offsetZ = (float)Math.sin(angle) * distance;
+            float offsetX = (float) Math.cos(angle) * distance;
+            float offsetZ = (float) Math.sin(angle) * distance;
             float offsetY = level.random.nextFloat() * 0.02f;
-            
-            float scale = 0.08f + level.random.nextFloat() * 0.04f;
-            int lifetime = 30 + level.random.nextInt(10);
-            
+
+            float scale = 0.16f + level.random.nextFloat() * 0.08f;
+            int lifetime = 25 + level.random.nextInt(10);
+
             WorldParticleBuilder.create(new WorldParticleOptions(ImmersiveParticles.TORCH_FLAME.get()))
                     .setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
                     .setScaleData(GenericParticleData.create(scale, scale * 0.8f)
@@ -98,16 +102,16 @@ public class LodestoneEffects {
                     .enableNoClip()
                     .spawn(level, x + offsetX, yOffset + offsetY, z + offsetZ);
         }
-        
-        for (int i = 0; i < 2; i++) {
+
+        if (level.random.nextFloat() < 0.2f) {
             float angle = level.random.nextFloat() * 6.28f;
             float distance = level.random.nextFloat() * 0.04f;
-            float offsetX = (float)Math.cos(angle) * distance;
-            float offsetZ = (float)Math.sin(angle) * distance;
-            
-            float scale = 0.05f + level.random.nextFloat() * 0.02f;
-            int lifetime = 20 + level.random.nextInt(10);
-            
+            float offsetX = (float) Math.cos(angle) * distance;
+            float offsetZ = (float) Math.sin(angle) * distance;
+
+            float scale = 0.08f + level.random.nextFloat() * 0.04f;
+            int lifetime = 15 + level.random.nextInt(8);
+
             WorldParticleBuilder.create(new WorldParticleOptions(ImmersiveParticles.TORCH_FLAME.get()))
                     .setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
                     .setScaleData(GenericParticleData.create(scale, 0f)
@@ -123,11 +127,11 @@ public class LodestoneEffects {
                     .enableNoClip()
                     .spawn(level, x + offsetX, yOffset + 0.2f, z + offsetZ);
         }
-        
+
         if (level.random.nextFloat() < 0.15f) {
             float emberX = (level.random.nextFloat() - 0.5f) * 0.1f;
             float emberZ = (level.random.nextFloat() - 0.5f) * 0.1f;
-            
+
             WorldParticleBuilder.create(new WorldParticleOptions(ImmersiveParticles.TORCH_FLAME.get()))
                     .setRenderType(LodestoneWorldParticleRenderType.ADDITIVE)
                     .setScaleData(GenericParticleData.create(0.12f, 0f)

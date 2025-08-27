@@ -1,9 +1,13 @@
 package com.leclowndu93150.immersive_effects;
 
+import com.leclowndu93150.immersive_effects.commands.FlameTestCommand;
 import com.leclowndu93150.immersive_effects.config.ImmersiveConfig;
 import com.leclowndu93150.immersive_effects.registration.ImmersiveParticles;
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -21,6 +25,13 @@ public class ImmersiveEffects {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ImmersiveParticles.PARTICLE_TYPES.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ImmersiveConfig.SPEC);
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+    
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        FlameTestCommand.register(event.getDispatcher());
     }
 
 }
